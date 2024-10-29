@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:insert="~{base :: parent(~{::title}, ~{::main})}">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home</title>
+</head>
+
+<body>
+    <main class="mt-20">
+        <div class="w-1/2 p-1 mx-auto mt-5 flex flex-col space-y-3">
+            <!-- th:text="${message} (OR) data-th-text="${message} [for Thymeleaf]-->
+            <h1 class="text-2xl font-bold" th:text="${message}">
+                Welcome to home page
+            </h1>
+            <p>This is the home page of our project</p>
+            <div class="mx-auto">
+                <button type="button" class="px-3 py-2 bg-blue-500 rounded text-white hover:bg-blue-600">
+                    Click
+                </button>
+            </div>
+
+            <a href="#"
+                class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+                    Noteworthy technology acquisitions 2021
+                </h5>
+                <p class="font-normal text-gray-700 dark:text-gray-400">
+                    Here are the biggest enterprise technology acquisitions
+                    of 2021 so far, in reverse chronological order.
+                </p>
+            </a>
+        </div>
+    </main>
+</body>
+
+</html>

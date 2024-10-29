@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html class="light" th:fragment="parent(title, main)" lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title th:replace="${title}">SCM Base</title>
+    <link rel="stylesheet" th:href="@{'/css/output.css'}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
+</head>
+
+<body class="dark:bg-neutral-900 dark:text-white">
+    <!-- Common Header -->
+    <header>
+        <div th:if="${user}">
+            <div th:insert="~{user/user_navbar}"></div>
+        </div>
+        <div th:unless="${user}">
+            <div th:insert="~{navbar}"></div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main th:replace="${main}">Main</main>
+
+    <!-- Common Footer -->
+    <footer></footer>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+<script th:src="@{'js/script.js'}"></script>
+
+</html>

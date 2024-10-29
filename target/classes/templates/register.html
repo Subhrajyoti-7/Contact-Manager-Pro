@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:insert="~{base :: parent(~{::title}, ~{::main})}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register here</title>
+</head>
+
+<body>
+    <main class="mt-20">
+        <div class="w-full flex justify-center mt-10">
+            <div
+                class="w-full max-w-sm p-6 bg-gray-100 border-t-8 border-green-600 rounded-lg shadow dark:bg-gray-800 dark:border-green-600">
+                <div class="flex justify-center">
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Register Here</h5>
+                </div>
+                <div>
+                    <!-- Form -->
+                    <form th:action="@{/register}" th:object="${userForm}" method="post" class="max-w-sm mx-auto">
+                        <div class="mb-5">
+                            <input th:field="*{name}" type="text" id="name" name="name"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                placeholder="Name" required />
+                            <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-red-600 px-1 py-2">
+                        </div>
+                        <div class="mb-5">
+                            <input th:field="*{email}" type="email" id="email" name="email"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                placeholder="Mail Id" required />
+                            <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+                                class="text-red-600 px-1 py-2">
+                        </div>
+                        <div class="mb-5">
+                            <input th:field="*{phoneNumber}" type="text" id="phone" name="phone"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                placeholder="Mobile number" required />
+                            <p th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"
+                                class="text-red-600 px-1 py-2">
+                        </div>
+                        <div class="mb-5">
+                            <input th:field="*{about}" type="text" id="about" name="about"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                placeholder="About" />
+                            <p th:if="${#fields.hasErrors('about')}" th:errors="*{about}"
+                                class="text-red-600 px-1 py-2">
+                        </div>
+                        <div class="mb-5">
+                            <input th:field="*{password}" type="password" id="password" name="password"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                required placeholder="Password" />
+                            <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+                                class="text-red-600 px-1 py-2">
+                        </div>
+                        <div class="flex justify-around">
+                            <a th:href="@{./}"
+                                class="text-white bg-gray-600 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
+                                Calcel
+                            </a>
+                            <button type="submit"
+                                class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                                Register
+                            </button>
+                        </div>
+                    </form>
+                    <p class="mt-5 text-center font-thin">Or sign up with</p>
+                    <div class="flex gap-10 justify-center mt-5">
+                        <div class="w-[40px]">
+                            <a th:href="@{/oauth2/authorization/google}"><img th:src="@{/images/google-icon.png}"
+                                    alt="Google"></a>
+                        </div>
+                        <div class="w-[40px]">
+                            <a th:href="@{/oauth2/authorization/github}"><img th:src="@{/images/github-icon.png}"
+                                    alt="GitHub"></a>
+                        </div>
+                        <div class="w-[40px]">
+                            <a th:href="@{/oauth2/authorization/facebook}"><img th:src="@{/images/facebook-icon.png}"
+                                    alt="FaceBook"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </main>
+</body>
+
+</html>

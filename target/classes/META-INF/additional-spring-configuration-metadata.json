@@ -1,0 +1,9 @@
+{
+    "properties": [
+        {
+            "name": "profile-picture-default",
+            "type": "java.lang.String",
+            "description": "A description for 'profile-picture-default'"
+        }
+    ]
+}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:insert="~{base :: parent(~{::title}, ~{::main})}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login here</title>
+</head>
+
+<body>
+    <main class="mt-20">
+        <div class="flex justify-center mt-10">
+            <div
+                class="w-full max-w-sm p-6 bg-gray-100 border-t-8 border-blue-600 rounded-lg shadow dark:bg-gray-800 dark:border-blue-600">
+                <div id="msg" th:insert="~{message :: messagebox}"></div>
+                <div class="flex justify-center">
+                    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Login Here</h5>
+                </div>
+                <div>
+                    <div class="text-red-600 ml-1" th:if="${param.error}">Invalid username or password</div>
+                    <div class="text-green-600 ml-1" th:if="${param.logout}">You have been successfully logged out</div>
+                    <form th:action="@{/authenticate}" method="post" class="max-w-sm mx-auto">
+                        <div class="mb-5">
+                            <input type="email" id="email" name="email"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                placeholder="User-id" required />
+                        </div>
+                        <div class="mb-5">
+                            <input type="password" id="password" name="password"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                required placeholder="Password" />
+                        </div>
+                        <div class="flex justify-around">
+                            <a th:href="@{./}"
+                                class="text-white bg-gray-600 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
+                                Calcel
+                            </a>
+                            <button type="submit"
+                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                Login
+                            </button>
+                        </div>
+                    </form>
+                    <!-- OAuth -->
+                    <p class="mt-5 text-center font-thin">Or sign up with</p>
+                    <div class="flex gap-10 justify-center mt-5">
+                        <div class="w-[40px]">
+                            <a th:href="@{/oauth2/authorization/google}"><img th:src="@{/images/google-icon.png}"
+                                    alt="Google"></a>
+                        </div>
+                        <div class="w-[40px]">
+                            <a th:href="@{/oauth2/authorization/github}"><img th:src="@{/images/github-icon.png}"
+                                    alt="GitHub"></a>
+                        </div>
+                        <div class="w-[40px]">
+                            <a th:href="@{/oauth2/authorization/facebook}"><img th:src="@{/images/facebook-icon.png}"
+                                    alt="FaceBook"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
