@@ -46,6 +46,8 @@ public class Contacts {
     @Builder.Default
     private boolean favorite = false;
 
+    private String cloudinaryImagePublicId;
+
     // If there are many links we will use this for another table
     // @OneToMany(mappedBy = "contact", cascade = CascadeType.ALL, fetch =
     // FetchType.LAZY, orphanRemoval = true)

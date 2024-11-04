@@ -5,6 +5,10 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.scm.entity.Contacts;
@@ -51,8 +55,12 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
-    public List<Contacts> fetchAllContactsByUser(Users user) {
-        return repo.findContactsByUser(user);
+    public Page<Contacts> fetchAllContactsByUser(Users user, int page, int pageSize, String sortField,
+            String direction) {
+        // Sorting
+        Sort sort = Sort.by(direction.equalsIgnoreCase("asc") ? Sort.Direction.ASC : Sort.Direction.DESC, sortField);
+        Pageable pageable = PageRequest.of(page, pageSize, sort);
+        return repo.findContactsByUser(user, pageable);
     }
 
 }

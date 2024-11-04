@@ -52,6 +52,7 @@ public class SecurityConfig {
         return httpSecurity
                 .authorizeHttpRequests(http -> {
                     http.requestMatchers("/user/**").authenticated();
+                    http.requestMatchers("/api/**").authenticated();
                     http.anyRequest().permitAll();
                 })
                 // default form login

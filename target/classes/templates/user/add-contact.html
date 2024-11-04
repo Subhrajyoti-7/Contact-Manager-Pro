@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:insert="~{base :: parent(~{::title}, ~{::main})}">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:insert="~{base :: parent(~{::title}, ~{::main}, ~{::script})}">
 
 <head>
     <meta charset="UTF-8">
@@ -107,8 +107,9 @@
                         <!-- Profile pic -->
                         <div>
                             <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                                for="file_input">Upload Profile Picture</label>
-                            <input type="file" th:field="*{pic}" name="pic" id="file_input"
+                                for="image_file_input">Upload Profile Picture</label>
+                            <img class="rounded-lg mx-auto shadow-md" src="" id="contact_image_preview" alt="">
+                            <input type="file" th:field="*{pic}" name="pic" id="image_file_input"
                                 class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
                         </div>
                         <!-- Links -->
@@ -150,5 +151,6 @@
         </div>
     </main>
 </body>
+<script th:src="@{'/js/admin.js'}"></script>
 
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="light" th:fragment="parent(title, main)" lang="en" xmlns:th="http://www.thymeleaf.org">
+<html class="light" th:fragment="parent(title, main, script)" lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8" />
@@ -28,6 +28,7 @@
     <footer></footer>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
-<script th:src="@{'js/script.js'}"></script>
+<script th:src="@{'/js/script.js'}"></script>
+<script th:replace="${script}"></script>
 
 </html>
