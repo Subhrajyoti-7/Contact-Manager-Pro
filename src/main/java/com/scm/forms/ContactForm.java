@@ -2,6 +2,8 @@ package com.scm.forms;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.scm.validators.ValidFile;
+
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -29,7 +31,14 @@ public class ContactForm {
 
     private String address;
 
+    @ValidFile(message = "Invalid File") // Using Custom validator
+    // OR using custom validator (file size should be in bytes)
+    // @Max(value = 2097152, message = "File size must be less than 2MB")
     private MultipartFile pic;
+
+    private String picture;
+
+    private String cloudinaryImagePublicId;
 
     private String facebook;
 

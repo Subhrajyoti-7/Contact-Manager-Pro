@@ -4,7 +4,7 @@
 
         <!-- Brand Logo-->
         <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
-            <img th:src="@{images/contact.png}" class="h-8" alt="SCM Logo">
+            <img th:src="@{/images/contact.png}" class="h-8" alt="SCM Logo">
             <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">SCM</span>
         </a>
 
@@ -12,8 +12,8 @@
         <div class="flex gap-3 md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
             <!-- Dark/Light mode -->
             <button type="button" id="btn" name="mode" title="Toggle Dark Mode" class="w-9 flex" onclick="applyTheme()">
-                <img id="btn1" th:src="@{images/dark.png}" alt="Toggle Dark Mode">
-                <img id="btn2" th:src="@{images/light.png}" alt="Toggle Dark Mode" hidden>
+                <img id="btn1" th:src="@{/images/dark.png}" alt="Toggle Dark Mode">
+                <img id="btn2" th:src="@{/images/light.png}" alt="Toggle Dark Mode" hidden>
             </button>
             <a th:href="@{/login}" type="button" id="lg-in"
                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login</a>

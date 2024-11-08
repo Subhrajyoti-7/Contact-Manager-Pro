@@ -50,7 +50,7 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
-    public Contacts updateContactById(Contacts contact) {
+    public Contacts updateContact(Contacts contact) {
         return repo.save(contact);
     }
 

@@ -56,11 +56,13 @@ public class Users implements UserDetails {
     // Information
 
     @Builder.Default
-    private boolean enabled = true;
+    private boolean enabled = false;
     @Builder.Default
     private boolean emailVerified = false;
     @Builder.Default
     private boolean phoneVerified = false;
+
+    private String emailToken;
 
     // Provider details
     @Builder.Default

@@ -4,14 +4,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import com.scm.helper.Message;
+import com.scm.helper.MessageType;
 import com.scm.service.SecurityCustomUserDetailService;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @Configuration
 public class SecurityConfig {
@@ -68,10 +76,34 @@ public class SecurityConfig {
                     form.defaultSuccessUrl("/user/dashboard");
                     // form.failureForwardUrl("/login?error=true");
                     // form.defaultFailureUrl("/login-error");
+
+                    // form.failureHandler(new AuthenticationFailureHandler() {
+                    // @Override
+                    // public void onAuthenticationFailure(HttpServletRequest request,
+                    // HttpServletResponse response,
+                    // AuthenticationException exception) throws IOException, ServletException {
+                    // }
+                    // });
+                    form.failureHandler((HttpServletRequest request, HttpServletResponse response,
+                            AuthenticationException exception) -> {
+                        if (exception instanceof DisabledException) {
+                            Message message = Message.builder()
+                                    .content("User is disabled!")
+                                    .type(MessageType.red)
+                                    .build();
+
+                            // Set message in HttpSession
+                            HttpSession session = request.getSession();
+                            session.setAttribute("message", message);
+                            response.sendRedirect("/login?disabled");
+                        } else {
+                            response.sendRedirect("/login?error");
+                        }
+                    });
                 })
                 .logout(form -> {
                     form.logoutUrl("/logout");
-                    form.logoutSuccessUrl("/login?logout=true");
+                    form.logoutSuccessUrl("/login?logout");
                     // form.invalidateHttpSession(true);
                     // form.clearAuthentication(true);
                     // form.permitAll();

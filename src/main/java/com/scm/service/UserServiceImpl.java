@@ -5,11 +5,13 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.scm.config.SecurityConfig;
 import com.scm.entity.Users;
 import com.scm.helper.AppConstants;
+import com.scm.helper.Helper;
 import com.scm.helper.ResourceNotFoundException;
 import com.scm.repo.UserRepo;
 
@@ -20,7 +22,13 @@ public class UserServiceImpl implements UserService {
     private UserRepo userRepo;
 
     @Autowired
+    private EmailService emailService;
+
+    @Autowired
     private SecurityConfig securityConfig;
+
+    @Value("${server.baseUrl}")
+    private String baseUrl;
 
     @Override
     public Users saveUser(Users user) {
@@ -36,7 +44,15 @@ public class UserServiceImpl implements UserService {
 
         user.setUid(userId);
 
-        return userRepo.save(user);
+        // Sending Email verification
+        String emailToken = UUID.randomUUID().toString();
+        String emailLink = Helper.getLinkForEmailVerification(emailToken, baseUrl);
+        user.setEmailToken(emailToken);
+        Users savedUser = userRepo.save(user);
+        emailService.sendEmail(savedUser.getEmail(), "Verify Account : Contact Manager Pro",
+                "Click the below link to verify yourself\n" + emailLink);
+
+        return savedUser;
     }
 
     @Override
@@ -87,6 +103,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public Optional<Users> getEmailByProviderId(String providerId) {
         return userRepo.findByProviderId(providerId);
+    }
+
+    @Override
+    public Optional<Users> getUserByToken(String token) {
+        return userRepo.findByEmailToken(token);
     }
 
 }

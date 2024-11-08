@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:insert="~{base :: parent(~{::title}, ~{::main}, ~{::script})}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CMP || Success</title>
+</head>
+
+<body>
+    <main class="mt-20">
+        <div class="w-full">
+            <div class="w-fit m-auto">
+                <img th:src="@{/images/success.png}" alt="" class="w-[30vw]">
+                <h1 class="text-center text-green-600 font-bold">Your account is successfully verified</h1>
+                <p class="text-center">Click
+                    <a th:href="@{/home}"
+                        class="font-serif font-semibold text-blue-500 hover:underline hover:text-blue-600">
+                        here
+                    </a> to go back to home page
+                </p>
+            </div>
+        </div>
+    </main>
+</body>
+<script></script>
+
+</html>

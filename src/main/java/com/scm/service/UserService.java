@@ -25,4 +25,6 @@ public interface UserService {
 
     Optional<Users> getEmailByProviderId(String providerId);
 
+    Optional<Users> getUserByToken(String token);
+
 }

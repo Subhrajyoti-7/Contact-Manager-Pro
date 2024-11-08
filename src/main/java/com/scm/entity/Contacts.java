@@ -1,5 +1,7 @@
 package com.scm.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -54,6 +56,7 @@ public class Contacts {
     // private List<SocialLinks> socialLinks = new ArrayList<>();
 
     @ManyToOne
+    @JsonIgnore
     private Users user;
 
 }

@@ -1,6 +1,7 @@
 package com.scm.repo;
 
 import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -14,5 +15,7 @@ public interface UserRepo extends JpaRepository<Users, String> {
     Optional<Users> findByEmailAndPassword(String email, String password);
 
     Optional<Users> findByProviderId(String providerId);
+
+    Optional<Users> findByEmailToken(String token);
 
 }

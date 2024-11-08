@@ -21,4 +21,11 @@ public class ApiController {
     public Contacts showContact(@PathVariable String contactId) {
         return contactService.fetchContactById(contactId).get();
     }
+
+    // Use if you want to use modals and api calling using fetch api
+    @GetMapping("/deleteContact/{contactId}")
+    public String deleteContact(@PathVariable String contactId) {
+        contactService.deleteContactById(contactId);
+        return "Contact with id " + contactId + " is deleted";
+    }
 }

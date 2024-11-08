@@ -23,6 +23,6 @@ public interface ContactService {
     public Page<Contacts> fetchAllContactsByUser(Users user, int page, int pageSize, String sortField,
             String direction);
 
-    public Contacts updateContactById(Contacts contact);
+    public Contacts updateContact(Contacts contact);
 
 }

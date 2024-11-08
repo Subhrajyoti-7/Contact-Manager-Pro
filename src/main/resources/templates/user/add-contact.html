@@ -111,6 +111,7 @@
                             <img class="rounded-lg mx-auto shadow-md" src="" id="contact_image_preview" alt="">
                             <input type="file" th:field="*{pic}" name="pic" id="image_file_input"
                                 class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
+                            <p th:if="${#fields.hasErrors('pic')}" th:errors="*{pic}" class="text-red-600 px-1 py-2">
                         </div>
                         <!-- Links -->
                         <div class="flex gap-3">
