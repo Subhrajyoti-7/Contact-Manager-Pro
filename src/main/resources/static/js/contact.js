@@ -74,3 +74,15 @@ const deleteContactClicked = (id) => {
 //         }
 //     });
 // }
+
+
+//Export Data to Excel format
+
+const exportData = () => {
+    TableToExcel.convert(document.getElementById("contact-table"), {
+        name: "contacts.xlsx",
+        sheet: {
+            name: "Sheet 1"
+        }
+    });
+};
