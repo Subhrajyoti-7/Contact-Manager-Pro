@@ -1,5 +1,11 @@
 node_modules
 target/classes/application.properties
 target/classes/application-dev.properties
+target/classes/application-local.properties
+target/classes/application-prod.properties
 src/main/resources/application.properties
 src/main/resources/application-dev.properties
+src/main/resources/application-local.properties
+src/main/resources/application-prod.properties
+.env.local
+.env

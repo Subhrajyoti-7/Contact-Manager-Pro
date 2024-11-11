@@ -1,5 +1,16 @@
 //Base url
-const baseUrl = "http://localhost:3030";
+// const baseUrl = "http://localhost:3030";
+
+//Using Fetch API
+const baseUrl = async () => {
+    try {
+        const response = await fetch("/api/baseUrl");
+        const data = await response.json();
+        return data.baseUrl;
+    } catch (e) {
+        console.log(e);
+    }
+}
 
 //Using Promise
 /*

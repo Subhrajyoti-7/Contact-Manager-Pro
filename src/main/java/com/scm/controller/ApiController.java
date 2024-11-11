@@ -1,6 +1,7 @@
 package com.scm.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +13,9 @@ import com.scm.service.ContactService;
 @RestController
 @RequestMapping("/api")
 public class ApiController {
+
+    @Value("${server.baseUrl}")
+    private String baseUrl;
 
     @Autowired
     private ContactService contactService;
@@ -27,5 +31,10 @@ public class ApiController {
     public String deleteContact(@PathVariable String contactId) {
         contactService.deleteContactById(contactId);
         return "Contact with id " + contactId + " is deleted";
+    }
+
+    @GetMapping("/baseUrl")
+    public String getBaseUrl() {
+        return baseUrl;
     }
 }

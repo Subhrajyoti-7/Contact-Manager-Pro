@@ -12,8 +12,8 @@ public class EmailServiceImpl implements EmailService {
     @Autowired
     private JavaMailSender emailSender;
 
-    @Value("${spring.mail.properties.from}")
-    private String from;
+    @Value("${spring.mail.properties.domain_name}")
+    private String domain_name;
 
     @Override
     public void sendEmail(String to, String subject, String body) {
@@ -21,7 +21,7 @@ public class EmailServiceImpl implements EmailService {
         message.setTo(to);
         message.setSubject(subject);
         message.setText(body);
-        message.setFrom(from);
+        message.setFrom(domain_name);
 
         emailSender.send(message);
 
