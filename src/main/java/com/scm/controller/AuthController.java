@@ -28,11 +28,22 @@ public class AuthController {
             return "success-page";
         }
 
+        return "error-page";
+
+        // OR
         // Redirect to Gmail
         // return new RedirectView("https://mail.google.com/");
 
-        // OR
+    }
+
+    @GetMapping("/err")
+    public String showErrorPage() {
         return "error-page";
+    }
+
+    @GetMapping("/scc")
+    public String showSuccessPage() {
+        return "success-page";
     }
 
 }
