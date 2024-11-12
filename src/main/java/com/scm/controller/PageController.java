@@ -39,19 +39,19 @@ public class PageController {
         return "home";
     }
 
-    @GetMapping("/about")
-    public String about() {
-        return "about";
-    }
-
     @GetMapping("/service")
     public String services() {
         return "service";
     }
 
-    @GetMapping("/contact")
+    @GetMapping("/about")
+    public String about() {
+        return "about";
+    }
+
+    @GetMapping("/contact-us")
     public String contacts() {
-        return "contacts";
+        return "contact-us";
     }
 
     @GetMapping("/register")

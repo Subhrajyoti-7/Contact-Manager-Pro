@@ -98,13 +98,13 @@
                             <td class="px-2 py-4">
                                 <!-- Modal toggle -->
                                 <!-- loadContactInfo([[${c.cid}]]) or th:contactId="${c.cid}" th:onclick="loadContactInfo(this.getAttribute('contactId'))" -->
-                                <!-- <button th:onclick="loadContactInfo([[${c.cid}]])" type="button"
+                                <button th:onclick="loadContactInfo([[${c.cid}]])" type="button"
                                     data-modal-target="edit-Contact-Modal" data-modal-show="edit-Contact-Modal"
                                     class="font-medium hover:text-gray-800" title="Edit">
-                                    <i class="fa-solid fa-pen-to-square"></i>
-                                </button> -->
+                                    <i class="fa-solid fa-eye"></i>
+                                </button>
                                 <a th:href="@{'/user/contacts/editContact/' + *{cid}}"
-                                    class="font-medium hover:text-gray-800" title="Edit">
+                                    class="font-medium ms-5 hover:text-gray-800" title="Edit">
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </a>
                                 <!-- <button type="button" th:onclick="deleteContactClicked([[${c.cid}]])"

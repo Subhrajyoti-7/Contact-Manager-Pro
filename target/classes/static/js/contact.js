@@ -2,33 +2,19 @@
 // const baseUrl = "http://localhost:3030";
 
 //Using Fetch API
-const baseUrl = async () => {
+let baseUrl;
+const getBaseUrl = async () => {
     try {
         const response = await fetch("/api/baseUrl");
         const data = await response.json();
-        return data.baseUrl;
+        baseUrl = data.baseUrl;
     } catch (e) {
         console.log(e);
     }
 }
+getBaseUrl();
 
-//Using Promise
-/*
-const loadContactInfo = (id) => {
-    //Fetching data from api
-    fetch(`http://localhost:3030/api/showContact/${id}`)
-        .then(response => response.json())
-        .then(data => {
-            console.log(data);
-        }).catch(error => {
-            console.log(error.message);
-        });
-};
-*/
-
-//OR
-
-//Edit contact Using async, await
+//View contact
 const loadContactInfo = async (id) => {
     //Fetching data from api
     try {
@@ -37,14 +23,13 @@ const loadContactInfo = async (id) => {
         if (data.pic === "user-default.png") {
             data.pic = "/images/user-default.png";
         }
-        console.log(data);
         document.getElementById('contact_image_preview2').src = data.pic;
-        document.getElementById('name').value = data.name;
-        document.getElementById('email').value = data.email;
-        document.getElementById('phone').value = data.phone;
-        document.getElementById('address').value = data.address;
-        document.getElementById('link1').value = data.facebook;
-        document.getElementById('link2').value = data.instagram;
+        document.getElementById('name').innerHTML = data.name;
+        document.getElementById('email').innerHTML = data.email;
+        document.getElementById('phone').innerHTML = data.phone;
+        document.getElementById('address').innerHTML = data.address;
+        document.getElementById('link1').innerHTML = data.facebook;
+        document.getElementById('link2').innerHTML = data.instagram;
     } catch (error) {
         console.log(error.message);
     }

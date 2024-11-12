@@ -35,6 +35,7 @@ public class ApiController {
 
     @GetMapping("/baseUrl")
     public String getBaseUrl() {
-        return baseUrl;
+        // return string value as json
+        return "{\"baseUrl\": \"" + baseUrl + "\"}";
     }
 }
