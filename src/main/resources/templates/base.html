@@ -1,11 +1,13 @@
 <!DOCTYPE html>
-<html class="" th:fragment="parent(title, main, script)" lang="en" xmlns:th="http://www.thymeleaf.org">
+<html class="" th:fragment="parent(title, main, script, link)" lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title th:replace="${title}">SCM Base</title>
+    <link rel="icon" type="image/x-icon" th:href="@{/images/contact.png}">
     <link rel="stylesheet" th:href="@{'/css/output.css'}" />
+    <link th:insert="${link}" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
 </head>
@@ -23,9 +25,6 @@
 
     <!-- Main Content -->
     <main th:replace="${main}">Main</main>
-
-    <!-- Common Footer -->
-    <footer></footer>
 </body>
 <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
 <script src="https://kit.fontawesome.com/d1a43a1003.js" crossorigin="anonymous"></script>

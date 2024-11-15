@@ -1,18 +1,82 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:insert="~{base :: parent(~{::title}, ~{::main}, ~{::script})}">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+    th:insert="~{base :: parent(~{::title}, ~{::main}, ~{::script}, ~{::link})}">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Services</title>
+    <link rel="stylesheet">
 </head>
 
 <body>
     <main class="mt-20">
-        <div>
-            <h1>Services</h1>
-            <p>This is the service page of our project</p>
-        </div>
+        <!-- Header Section -->
+        <header class="bg-gradient-to-br from-blue-500 to-blue-200 text-white rounded-l-full ml-7 py-20">
+            <div class="container mx-auto text-center px-6">
+                <h1 class="text-5xl font-bold">Explore Our Services</h1>
+                <p class="mt-6 text-xl max-w-2xl mx-auto">Unlock tools and features designed to help you manage,
+                    organize, and stay connected with your contacts effortlessly.</p>
+            </div>
+        </header>
+
+        <!-- Services Section -->
+        <section class="container mx-auto py-16 px-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+
+            <!-- Easy Contact Management Card -->
+            <div
+                class="flex flex-col items-center text-center p-8 bg-white rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">
+                <div class="bg-blue-500 p-4 rounded-full mb-4">
+                    <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path
+                            d="M10 2a7 7 0 100 14A7 7 0 0010 2zm0 13a6 6 0 110-12 6 6 0 010 12zM7 8a1 1 0 00-1 1v3a1 1 0 002 0V9a1 1 0 00-1-1zm5 1a1 1 0 10-2 0v3a1 1 0 002 0V9z" />
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-semibold text-blue-600 mb-2">Easy Contact Management</h3>
+                <p class="text-gray-600">Add, update, and delete contacts with a user-friendly interface that simplifies
+                    contact management.</p>
+            </div>
+
+            <!-- Organize Your Contacts Card -->
+            <div
+                class="flex flex-col items-center text-center p-8 bg-white rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">
+                <div class="bg-green-500 p-4 rounded-full mb-4">
+                    <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path
+                            d="M2.5 5.5a1.5 1.5 0 013 0V10a4.978 4.978 0 012-.535V5.5a1.5 1.5 0 013 0v3.965A4.978 4.978 0 0112 10V5.5a1.5 1.5 0 113 0V12a7 7 0 11-14 0V5.5z" />
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-semibold text-green-600 mb-2">Organize Your Contacts</h3>
+                <p class="text-gray-600">Group and categorize contacts for quick access and a seamless organizational
+                    experience.</p>
+            </div>
+
+            <!-- Stay Connected Card -->
+            <div
+                class="flex flex-col items-center text-center p-8 bg-white rounded-lg shadow-lg transform hover:scale-105 transition-transform duration-300">
+                <div class="bg-purple-500 p-4 rounded-full mb-4">
+                    <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M10 2a8 8 0 00-8 8v3h3l1 2v3h8v-3l1-2h3v-3a8 8 0 00-8-8z" />
+                    </svg>
+                </div>
+                <h3 class="text-2xl font-semibold text-purple-600 mb-2">Stay Connected</h3>
+                <p class="text-gray-600">Ensure your connections are always up-to-date and accessible whenever you need
+                    them.</p>
+            </div>
+
+        </section>
+
+        <!-- Contact Us Section -->
+        <section class="bg-indigo-600 text-white py-20">
+            <div class="container mx-auto text-center px-6">
+                <h2 class="text-3xl font-bold">Have Questions?</h2>
+                <p class="mt-4 text-lg">Get in touch with our support team to learn more about how our services can help
+                    you manage contacts effectively.</p>
+                <a th:href="@{/contact-us}"
+                    class="mt-8 inline-block bg-white text-indigo-600 font-semibold px-8 py-3 rounded-lg shadow-md hover:bg-gray-100 transition-colors duration-300">Contact
+                    Us</a>
+            </div>
+        </section>
     </main>
 </body>
 <script></script>

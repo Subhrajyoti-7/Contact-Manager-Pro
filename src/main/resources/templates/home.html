@@ -1,37 +1,87 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:insert="~{base :: parent(~{::title}, ~{::main}, ~{::script})}">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+    th:insert="~{base :: parent(~{::title}, ~{::main}, ~{::script}, ~{::link})}">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 
 <body>
     <main class="mt-20">
-        <div class="w-1/2 p-1 mx-auto mt-5 flex flex-col space-y-3">
-            <!-- th:text="${message} (OR) data-th-text="${message} [for Thymeleaf]-->
-            <h1 class="text-2xl font-bold" th:text="${message}">
-                Welcome to home page
-            </h1>
-            <p>This is the home page of our project</p>
-            <div class="mx-auto">
-                <button type="button" class="px-3 py-2 bg-blue-500 rounded text-white hover:bg-blue-600">
-                    Click
-                </button>
+        <!-- Hero Section -->
+        <section id="hero" class="flex flex-col gap-1 justify-center">
+            <div class="bg-gradient-to-b from-blue-600 to-blue-200 text-white py-20 rounded-b-[50%]">
+                <div id="welcome" class="container mx-auto px-6 text-center">
+                    <h2 class="text-4xl font-bold mb-4">Effortlessly Manage Your Contacts</h2>
+                    <p class="text-lg mb-6">Keep all your contacts organized, updated, and accessible at any time.</p>
+                    <a th:href="@{/login}"
+                        class="px-6 py-3 bg-white text-blue-600 font-semibold rounded-lg shadow-md hover:bg-gray-100">Get
+                        Started</a>
+                </div>
             </div>
 
-            <a href="#"
-                class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                    Noteworthy technology acquisitions 2021
-                </h5>
-                <p class="font-normal text-gray-700 dark:text-gray-400">
-                    Here are the biggest enterprise technology acquisitions
-                    of 2021 so far, in reverse chronological order.
+            <!-- Carousel slider-->
+            <div id="default-carousel" class="relative w-[80%] m-auto" data-carousel="slide">
+                <!-- Carousel wrapper -->
+                <div class="relative h-56 overflow-hidden rounded-lg md:h-96">
+                    <!-- Item 1 -->
+                    <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                        <img th:src="@{/images/slider_1.png}"
+                            class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="">
+                    </div>
+                    <!-- Item 2 -->
+                    <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                        <img th:src="@{/images/slider_2.png}"
+                            class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="">
+                    </div>
+                    <!-- Item 3 -->
+                    <div class="hidden duration-700 ease-in-out" data-carousel-item>
+                        <img th:src="@{/images/slider_3.png}"
+                            class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2" alt="">
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="container mx-auto px-6 py-20 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+                <h3 class="text-2xl font-semibold text-blue-600 mb-2">Easy Contact Management</h3>
+                <p class="text-gray-700 text-justify">Simplify the process of organizing your contacts with intuitive
+                    tools that
+                    allow you to add, update, and delete contact information effortlessly. Our streamlined interface
+                    makes it easy to keep track of essential details, ensuring you can quickly find and manage each
+                    contact without hassle. With everything in one place, you'll stay organized and connected with
+                    minimal effort.</p>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+                <h3 class="text-2xl font-semibold text-blue-600 mb-2">Organize Your Contacts</h3>
+                <p class="text-gray-700 text-justify">Keep your contacts neatly organized by grouping, tagging, and
+                    categorizing them
+                    according to your preferences. Whether by personal, professional, or custom categories, you’ll have
+                    the flexibility to structure your contacts in a way that suits your needs. This feature makes
+                    finding and managing contacts quick and easy, so you're always one step ahead in staying connected.
                 </p>
-            </a>
-        </div>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-lg text-center">
+                <h3 class="text-2xl font-semibold text-blue-600 mb-2">Stay Connected</h3>
+                <p class="text-gray-700 text-justify">Strengthen your relationships by keeping all your contact
+                    information
+                    up-to-date and easily accessible. With reminders for follow-ups and streamlined contact
+                    organization, you'll never miss an opportunity to connect with those who matter most. Stay in touch,
+                    build networks, and foster meaningful connections effortlessly.</p>
+            </div>
+        </section>
+        <!-- Footer -->
+        <footer class="bg-gray-800 text-white py-6">
+            <div class="container mx-auto px-6 text-center">
+                <p>&copy; 2024 Contact Manager Pro. All Rights Reserved.</p>
+            </div>
+        </footer>
     </main>
 </body>
 <script></script>
