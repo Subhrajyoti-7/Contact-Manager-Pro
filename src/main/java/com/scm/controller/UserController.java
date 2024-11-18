@@ -1,6 +1,5 @@
 package com.scm.controller;
 
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +12,8 @@ import com.scm.entity.Users;
 import com.scm.helper.Helper;
 import com.scm.service.ContactService;
 import com.scm.service.UserService;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/user")
@@ -29,16 +30,23 @@ public class UserController {
     public String viewUserProfile(Map<String, Object> map, Authentication authentication) {
         String email = Helper.getEmailOfLoggedInUser(authentication);
         Users user = userService.findByEmail(email).get();
-        int count = contactService.countContacts(user.getUid());
         map.put("user", user);
-        map.put("contactCount", count);
         return "user/profile";
     }
 
     // user dashboard page
     @GetMapping("/dashboard")
-    public String viewUserDashboard() {
+    public String viewUserDashboard(Authentication authentication, HttpSession session) {
+        String email = Helper.getEmailOfLoggedInUser(authentication);
+        Users user = userService.findByEmail(email).get();
+        int count = contactService.countContacts(user.getUid());
+        session.setAttribute("contactCount", count);
         return "user/dashboard";
+    }
+
+    @GetMapping("/settings")
+    public String settings() {
+        return "user/settings";
     }
 
 }

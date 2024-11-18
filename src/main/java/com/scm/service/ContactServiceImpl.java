@@ -65,9 +65,6 @@ public class ContactServiceImpl implements ContactService {
     @Override
     public Page<Contacts> fetchAllContactsBySearch(String search, int page, int pageSize, String sortField,
             String direction) {
-        // if (search == null || search.trim().isEmpty()) {
-        // return Page.empty(); // Return an empty result for null or empty search
-        // }
         // Sorting
         Sort sort = Sort.by(direction.equalsIgnoreCase("asc") ? Sort.Direction.ASC : Sort.Direction.DESC, sortField);
         Pageable pageable = PageRequest.of(page, pageSize, sort);

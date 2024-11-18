@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.scm.entity.Contacts;
 import com.scm.entity.Users;
@@ -89,13 +90,19 @@ public class ContactController {
             @RequestParam(value = "pageSize", defaultValue = "5") int pageSize,
             @RequestParam(value = "sortField", defaultValue = "name") String sortField,
             @RequestParam(value = "direction", defaultValue = "asc") String direction,
+            @ModelAttribute("text") String text,
             Authentication authentication,
             Map<String, Object> map) {
         // Getting User information
         String email = Helper.getEmailOfLoggedInUser(authentication);
         Users user = userService.findByEmail(email).get();
         // Fetch all contacts for the user
-        Page<Contacts> contacts = service.fetchAllContactsByUser(user, page, pageSize, sortField, direction);
+        Page<Contacts> contacts;
+        if (text == null || text.isEmpty())
+            contacts = service.fetchAllContactsByUser(user, page, pageSize, sortField, direction);
+        else
+            contacts = service.fetchAllContactsBySearch(text, page, pageSize, sortField, direction);
+
         map.put("contacts", contacts);
 
         return "user/contacts";
@@ -164,25 +171,6 @@ public class ContactController {
             contact.setFavorite(true);
         service.updateContact(contact);
         return "redirect:/user/contacts/viewContacts";
-    }
-
-    @PostMapping("/searchContacts")
-    public String searchContacts(@ModelAttribute("text") String text,
-            @RequestParam(value = "page", defaultValue = "0") int page,
-            @RequestParam(value = "pageSize", defaultValue = "5") int pageSize,
-            @RequestParam(value = "sortField", defaultValue = "name") String sortField,
-            @RequestParam(value = "direction", defaultValue = "asc") String direction,
-            Authentication authentication,
-            Map<String, Object> map) {
-
-        // Getting User information
-        // String email = Helper.getEmailOfLoggedInUser(authentication);
-        // Users user = userService.findByEmail(email).get();
-        // Fetch all contacts for the user
-        Page<Contacts> contacts = service.fetchAllContactsBySearch(text, page, pageSize, sortField, direction);
-        map.put("contacts", contacts);
-
-        return "user/search-contacts";
     }
 
     // If not using api calling by fetch api

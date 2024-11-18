@@ -28,6 +28,85 @@
 
         <!-- Mian content -->
         <div class="p-4 sm:ml-64">
+            <!-- Main Content -->
+            <div class="flex-1 bg-gray-100 rounded-lg p-6">
+                <!-- Page Header -->
+                <header class="mb-6">
+                    <h1 class="text-2xl font-bold text-gray-800">Dashboard</h1>
+                    <p class="text-gray-600">Welcome back! Here's what's happening today:</p>
+                </header>
+
+                <!-- Stats and Widgets -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Card: Total Contacts -->
+                    <div class="bg-white shadow rounded-lg p-6">
+                        <h3 class="text-lg font-semibold text-gray-700">Total Contacts</h3>
+                        <p th:text="${session.contactCount}" class="mt-2 text-4xl font-bold text-blue-600">120</p>
+                        <span class="text-sm text-gray-500">Add more contacts</span>
+                    </div>
+
+                    <!-- Card: New Contacts -->
+                    <div class="bg-white shadow rounded-lg p-6">
+                        <h3 class="text-lg font-semibold text-gray-700">New Contacts</h3>
+                        <p class="mt-2 text-4xl font-bold text-green-600">0</p>
+                        <span class="text-sm text-gray-500">Today</span>
+                    </div>
+
+                    <!-- Card: Pending Actions -->
+                    <div class="bg-white shadow rounded-lg p-6">
+                        <h3 class="text-lg font-semibold text-gray-700">Pending Actions</h3>
+                        <p class="mt-2 text-4xl font-bold text-red-600">0</p>
+                        <span class="text-sm text-gray-500">Complete tasks to clear</span>
+                    </div>
+
+                    <!-- Card: Completed Actions -->
+                    <div class="bg-white shadow rounded-lg p-6">
+                        <h3 class="text-lg font-semibold text-gray-700">Completed Actions</h3>
+                        <p class="mt-2 text-4xl font-bold text-indigo-600">0</p>
+                        <span class="text-sm text-gray-500">Great progress!</span>
+                    </div>
+                </div>
+
+                <!-- Recent Activity and Insights -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-8">
+                    <!-- Recent Activities -->
+                    <div class="col-span-1 lg:col-span-2 bg-white shadow rounded-lg p-6">
+                        <h3 class="text-lg font-semibold text-gray-700 mb-4">Recent Activities</h3>
+                        <ul class="divide-y divide-gray-200">
+                            <li class="py-3 flex justify-between items-center">
+                                <div>
+                                    <p class="text-gray-600">Added new contact <strong>John Doe</strong>.</p>
+                                    <span class="text-sm text-gray-500">2 hours ago</span>
+                                </div>
+                                <span class="text-sm text-green-600">+1 contact</span>
+                            </li>
+                            <li class="py-3 flex justify-between items-center">
+                                <div>
+                                    <p class="text-gray-600">Updated contact <strong>Jane Smith</strong>.</p>
+                                    <span class="text-sm text-gray-500">1 day ago</span>
+                                </div>
+                                <span class="text-sm text-yellow-600">Updated</span>
+                            </li>
+                            <li class="py-3 flex justify-between items-center">
+                                <div>
+                                    <p class="text-gray-600">Removed contact <strong>Mark Johnson</strong>.</p>
+                                    <span class="text-sm text-gray-500">3 days ago</span>
+                                </div>
+                                <span class="text-sm text-red-600">-1 contact</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Insights or Graphs -->
+                    <div class="bg-white shadow rounded-lg p-6">
+                        <h3 class="text-lg font-semibold text-gray-700">Insights</h3>
+                        <p class="py-6 text-gray-400">Your activities</p>
+                        <div class="h-40 mt-4 bg-gray-200 rounded-lg flex items-center justify-center text-gray-500">
+                            <img th:src="@{/images/graph.png}" class="rounded-lg shadow-lg" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
     </main>
