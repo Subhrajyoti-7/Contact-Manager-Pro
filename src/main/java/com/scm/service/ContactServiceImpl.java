@@ -45,8 +45,7 @@ public class ContactServiceImpl implements ContactService {
 
     @Override
     public List<Contacts> fetchContactsByUserId(String userId) {
-        // return repo.fetchContactsByUserId(userId);
-        return null;
+        return repo.fetchContactsByUserId(userId);
     }
 
     @Override
@@ -61,6 +60,23 @@ public class ContactServiceImpl implements ContactService {
         Sort sort = Sort.by(direction.equalsIgnoreCase("asc") ? Sort.Direction.ASC : Sort.Direction.DESC, sortField);
         Pageable pageable = PageRequest.of(page, pageSize, sort);
         return repo.findContactsByUser(user, pageable);
+    }
+
+    @Override
+    public Page<Contacts> fetchAllContactsBySearch(String search, int page, int pageSize, String sortField,
+            String direction) {
+        // if (search == null || search.trim().isEmpty()) {
+        // return Page.empty(); // Return an empty result for null or empty search
+        // }
+        // Sorting
+        Sort sort = Sort.by(direction.equalsIgnoreCase("asc") ? Sort.Direction.ASC : Sort.Direction.DESC, sortField);
+        Pageable pageable = PageRequest.of(page, pageSize, sort);
+        return repo.findContactsBySearch(search, pageable);
+    }
+
+    @Override
+    public int countContacts(String userId) {
+        return repo.countContactsByUserUid(userId);
     }
 
 }

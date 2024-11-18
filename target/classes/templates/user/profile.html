@@ -27,8 +27,48 @@
         <div th:insert="~{user/sidebar}">Sidebar</div>
 
         <!-- Mian content -->
-        <div class="p-4 sm:ml-64">
+        <div class="p-4 sm:ml-64" th:object="${user}">
+            <!-- Profile Header -->
+            <header
+                class="bg-gradient-to-r from-blue-600 to-green-400 text-white py-7 h-76 rounded-bl-full rounded-tr-full">
+                <div class="container mx-auto text-center">
+                    <div class="flex flex-col items-center">
+                        <img th:if="*{profilePic == 'user-default.png'}" th:src="@{/images/user-default.png}" alt=""
+                            class="w-40 h-40 rounded-full border-4 border-white mb-4">
+                        <img th:unless="*{profilePic == 'user-default.png'}" th:src="*{profilePic}" alt=""
+                            class="w-40 h-40 rounded-full border-4 border-white mb-4">
+                        <h1 th:text="*{name}" class="text-3xl font-semibold">John Doe</h1>
+                        <p th:text="*{email}" class="text-gray-200 mt-2">john.doe@example.com</p>
+                        <p th:text="*{phoneNumber}" class="text-gray-200 mt-2">0123456789</p>
+                    </div>
+                </div>
+            </header>
 
+            <!-- User Stats -->
+            <section class="container mx-auto py-8 px-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <div class="bg-white p-6 rounded-lg shadow-lg text-center dark:bg-gray-800">
+                        <h2 th:text="${contactCount}" class="text-2xl font-semibold text-gray-700 dark:text-white">120
+                        </h2>
+                        <p class="text-gray-500 dark:text-white">Contacts</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-lg text-center dark:bg-gray-800">
+                        <h2 class="text-2xl font-semibold text-gray-700 dark:text-white">5</h2>
+                        <p class="text-gray-500 dark:text-white">Calls</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-lg shadow-lg text-center dark:bg-gray-800">
+                        <h2 class="text-2xl font-semibold text-gray-700 dark:text-white">10</h2>
+                        <p class="text-gray-500 dark:text-white">Messages</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Other details  -->
+            <section class="container mx-auto py-16 px-6">
+                <div class="bg-white dark:bg-gray-800 dark:text-white p-8 rounded-lg shadow-lg max-w-3xl mx-auto">
+                    <p th:text="*{about}">About</p>
+                </div>
+            </section>
         </div>
     </main>
 </body>

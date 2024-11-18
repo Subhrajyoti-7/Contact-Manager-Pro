@@ -81,3 +81,9 @@ const exportData = () => {
         }
     });
 };
+
+//Display searched contacts while typing
+let searchInput = document.getElementById("search-contact");
+searchInput.onchange = function () {
+    alert("Search");
+}

@@ -40,18 +40,28 @@
                             <button type="button" onclick="exportData()" title="export"><i
                                     class="fa-solid fa-file-export"></i></button>
                         </div>
-                        <div class="relative">
-                            <div class="absolute inset-y-0 rtl:inset-r-0 flex items-center ps-3 pointer-events-none">
-                                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
-                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
-                                </svg>
+                        <form th:action="@{/user/contacts/searchContacts}" method="POST" modelAttribute="text">
+                            <div class="relative">
+                                <div
+                                    class="absolute inset-y-0 rtl:inset-r-0 flex items-center ps-3 pointer-events-none">
+                                    <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+                                    </svg>
+                                </div>
+                                <input type="text" name="text" id="search-contact"
+                                    class="block pt-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="Search for users">
                             </div>
-                            <input type="text" id="table-search-users"
-                                class="block pt-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="Search for users">
-                        </div>
+                            <button type="submit" title="Search">
+                                <i class="fa-solid fa-search"></i>
+                            </button>
+                        </form>
+                        <!-- For fetch api -->
+                        <!-- <button type="button" onclick="searchUsers()" title="Search">
+                            <i class="fa-solid fa-search"></i>
+                        </button> -->
                     </div>
                 </div>
                 <table id="contact-table"
@@ -99,16 +109,31 @@
                             </td>
                             <td class="px-2 py-4">
                                 <!-- Modal toggle -->
+                                <!-- Make favorite -->
+                                <a th:href="@{'/user/contacts/makeFavorite/' + *{cid}}" th:if="*{favorite == true}"
+                                    class="font-medium hover:text-gray-800" title="Favorite">
+                                    <i class="fa-solid fa-heart text-red-600"></i>
+                                </a>
+                                <a th:href="@{'/user/contacts/makeFavorite/' + *{cid}}" th:unless="*{favorite == true}"
+                                    class="font-medium hover:text-gray-800" title="Favorite">
+                                    <i class="fa-regular fa-heart"></i>
+                                </a>
+
+                                <!-- View Contact info -->
                                 <!-- loadContactInfo([[${c.cid}]]) or th:contactId="${c.cid}" th:onclick="loadContactInfo(this.getAttribute('contactId'))" -->
                                 <button th:onclick="loadContactInfo([[${c.cid}]])" type="button"
                                     data-modal-target="edit-Contact-Modal" data-modal-show="edit-Contact-Modal"
-                                    class="font-medium hover:text-gray-800" title="Edit">
+                                    class="font-medium ms-5 hover:text-gray-800" title="Edit">
                                     <i class="fa-solid fa-eye"></i>
                                 </button>
+
+                                <!-- Edit contact -->
                                 <a th:href="@{'/user/contacts/editContact/' + *{cid}}"
                                     class="font-medium ms-5 hover:text-gray-800" title="Edit">
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </a>
+
+                                <!-- Delete contact -->
                                 <!-- <button type="button" th:onclick="deleteContactClicked([[${c.cid}]])"
                                     class="font-medium ms-5 hover:text-gray-800" title="Delete">
                                     <i class="fa-solid fa-trash"></i>

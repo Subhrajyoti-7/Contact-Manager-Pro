@@ -97,7 +97,6 @@ public class ContactController {
         // Fetch all contacts for the user
         Page<Contacts> contacts = service.fetchAllContactsByUser(user, page, pageSize, sortField, direction);
         map.put("contacts", contacts);
-        map.put("user", user);
 
         return "user/contacts";
     }
@@ -154,6 +153,36 @@ public class ContactController {
         service.updateContact(contact);
 
         return "redirect:/user/contacts/viewContacts";
+    }
+
+    @GetMapping("/makeFavorite/{contactId}")
+    public String makeContactFavorite(@PathVariable String contactId) {
+        Contacts contact = service.fetchContactById(contactId).get();
+        if (contact.isFavorite())
+            contact.setFavorite(false);
+        else
+            contact.setFavorite(true);
+        service.updateContact(contact);
+        return "redirect:/user/contacts/viewContacts";
+    }
+
+    @PostMapping("/searchContacts")
+    public String searchContacts(@ModelAttribute("text") String text,
+            @RequestParam(value = "page", defaultValue = "0") int page,
+            @RequestParam(value = "pageSize", defaultValue = "5") int pageSize,
+            @RequestParam(value = "sortField", defaultValue = "name") String sortField,
+            @RequestParam(value = "direction", defaultValue = "asc") String direction,
+            Authentication authentication,
+            Map<String, Object> map) {
+
+        // Getting User information
+        // String email = Helper.getEmailOfLoggedInUser(authentication);
+        // Users user = userService.findByEmail(email).get();
+        // Fetch all contacts for the user
+        Page<Contacts> contacts = service.fetchAllContactsBySearch(text, page, pageSize, sortField, direction);
+        map.put("contacts", contacts);
+
+        return "user/search-contacts";
     }
 
     // If not using api calling by fetch api
