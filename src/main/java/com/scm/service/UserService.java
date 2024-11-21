@@ -17,6 +17,8 @@ public interface UserService {
 
     Users updateUser(Users user);
 
+    Users updatePassword(Users user);
+
     Optional<Users> findByEmail(String email);
 
     boolean isUserExist(String id);

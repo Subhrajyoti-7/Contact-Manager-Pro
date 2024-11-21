@@ -53,6 +53,8 @@ public class Users implements UserDetails {
     @Column(length = 200)
     private String profilePic;
 
+    private String cloudinaryImagePublicId;
+
     // Information
 
     @Builder.Default

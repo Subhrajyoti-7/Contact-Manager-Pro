@@ -1,5 +1,10 @@
 package com.scm.forms;
 
+import org.springframework.web.multipart.MultipartFile;
+
+import com.scm.validators.ValidFile;
+
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
@@ -10,6 +15,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@MultipartConfig
 public class UserForm {
 
     @NotBlank(message = "Name is required")
@@ -29,4 +35,11 @@ public class UserForm {
     private String password;
 
     private String about;
+
+    private String pic;
+
+    @ValidFile(message = "Invalid File")
+    private MultipartFile profilePic;
+
+    private String cloudinaryImagePublicId;
 }

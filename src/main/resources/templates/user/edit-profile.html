@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+    th:insert="~{base :: parent(~{::title}, ~{::main}, ~{::script}, ~{::link})}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Profile</title>
+    <link rel="stylesheet">
+</head>
+
+<body>
+    <main class="mt-16">
+        <button data-drawer-target="sidebar-multi-level-sidebar" data-drawer-toggle="sidebar-multi-level-sidebar"
+            aria-controls="sidebar-multi-level-sidebar" type="button"
+            class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+            <span class="sr-only">Open sidebar</span>
+            <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg">
+                <path clip-rule="evenodd" fill-rule="evenodd"
+                    d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z">
+                </path>
+            </svg>
+        </button>
+
+        <!-- Sidebar -->
+        <div th:insert="~{user/sidebar}">Sidebar</div>
+
+        <!-- Mian content -->
+        <div class="p-4 sm:ml-64">
+            <div class="flex justify-center">
+                <div
+                    class="w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
+                    <!-- <h5 class="mb-7 text-xl text-center font-medium text-gray-900 dark:text-white">Edit Profile</h5> -->
+                    <form class="space-y-6" th:object="${userForm}" th:action="@{/user/editProfile}" method="POST"
+                        enctype="multipart/form-data">
+
+                        <!-- Profile pic -->
+                        <div>
+                            <img class="rounded-full w-40 mx-auto shadow-md" th:if="*{pic == 'user-default.png'}"
+                                th:src="@{/images/user-default.png}" alt="" id="imgHide">
+                            <img class="rounded-full w-40 mx-auto shadow-md" th:unless="*{pic == 'user-default.png'}"
+                                th:src="*{pic}" alt="" id="imgHide">
+                            <img class="rounded-full w-40 mx-auto shadow-md" src="" alt="" id="profile_preview">
+                            <label class="block mb-2 text-sm text-center font-medium text-gray-900 dark:text-white"
+                                for="image_input">Change Profile Picture</label>
+                            <input type="file" th:field="*{profilePic}" name="pic" id="image_input"
+                                class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400">
+                            <p th:if="${#fields.hasErrors('profilePic')}" th:errors="*{profilePic}"
+                                class="text-red-600 px-1 py-2">
+                        </div>
+                        <!-- cloudinaryImagePublicId -->
+                        <div th:field="*{cloudinaryImagePublicId}" class="disabled"></div>
+
+                        <!-- Name -->
+                        <div>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor"
+                                        viewBox="0 0 512 512"
+                                        class="flex-shrink-0 w-5 h-5 text-gray-600 dark:text-gray-400">
+                                        <path
+                                            d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z" />
+                                    </svg>
+                                </div>
+                                <input type="text" th:field="*{name}" name="name" id="name"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                    placeholder="Name" required readonly />
+                            </div>
+                        </div>
+
+                        <!-- Email -->
+                        <div>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor"
+                                        viewBox="0 0 512 512"
+                                        class="flex-shrink-0 w-5 h-5 text-gray-600 dark:text-gray-400">
+                                        <path
+                                            d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48L48 64zM0 176L0 384c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-208L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z" />
+                                    </svg>
+                                </div>
+                                <input type="email" th:field="*{email}" name="email" id="email"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                    placeholder="Email" required readonly />
+                            </div>
+                        </div>
+
+                        <!-- Phone -->
+                        <div>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor"
+                                        viewBox="0 0 512 512"
+                                        class="flex-shrink-0 w-5 h-5 text-gray-600 dark:text-gray-400">
+                                        <path
+                                            d="M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z" />
+                                    </svg>
+                                </div>
+                                <input type="tel" th:field="*{phoneNumber}" name="phone" id="phone"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                    placeholder="Phone Number" required />
+                            </div>
+                            <p th:if="${#fields.hasErrors('phoneNumber')}" th:errors="*{phoneNumber}"
+                                class="text-red-600 px-1 py-2"></p>
+                        </div>
+
+                        <!-- Password -->
+                        <div class="hidden">
+                            <div class="relative">
+                                <div class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor"
+                                        viewBox="0 0 512 512"
+                                        class="flex-shrink-0 w-5 h-5 text-gray-600 dark:text-gray-400">
+                                        <path
+                                            d="M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z" />
+                                    </svg>
+                                </div>
+                                <input type="text" th:field="*{password}" name="password" id="password"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                    placeholder="Password" required />
+                            </div>
+                            <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+                                class="text-red-600 px-1 py-2"></p>
+                        </div>
+
+                        <!-- About -->
+                        <div class="relative">
+                            <div class="absolute inset-y-0 start-0 flex mt-3 ps-2.5 pointer-events-none">
+                                <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor"
+                                    viewBox="0 0 512 512"
+                                    class="flex-shrink-0 w-7 h-5 text-gray-600 dark:text-gray-400">
+                                    <path
+                                        d="M64 32C28.7 32 0 60.7 0 96L0 416c0 35.3 28.7 64 64 64l448 0c35.3 0 64-28.7 64-64l0-320c0-35.3-28.7-64-64-64L64 32zm80 256l64 0c44.2 0 80 35.8 80 80c0 8.8-7.2 16-16 16L80 384c-8.8 0-16-7.2-16-16c0-44.2 35.8-80 80-80zm-32-96a64 64 0 1 1 128 0 64 64 0 1 1 -128 0zm256-32l128 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-128 0c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64l128 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-128 0c-8.8 0-16-7.2-16-16s7.2-16 16-16zm0 64l128 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-128 0c-8.8 0-16-7.2-16-16s7.2-16 16-16z" />
+                                </svg>
+                            </div>
+                            <textarea th:field="*{about}" name="about" id="about" placeholder="About"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"></textarea>
+                        </div>
+
+                        <div class="flex justify-evenly">
+                            <button type="submit"
+                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                Save changes
+                            </button>
+                            <a th:href="@{/user/profile}"
+                                class="text-white bg-gray-700 hover:bg-gray-800 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800">
+                                Cancel
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+<script th:src="@{/js/user.js}"></script>
+
+</html>

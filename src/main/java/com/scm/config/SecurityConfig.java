@@ -88,7 +88,7 @@ public class SecurityConfig {
                             AuthenticationException exception) -> {
                         if (exception instanceof DisabledException) {
                             Message message = Message.builder()
-                                    .content("User is disabled!")
+                                    .content("User is disabled! Verify your Email.")
                                     .type(MessageType.red)
                                     .build();
 

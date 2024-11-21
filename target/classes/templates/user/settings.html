@@ -26,12 +26,219 @@
         <!-- Sidebar -->
         <div th:insert="~{user/sidebar}">Sidebar</div>
 
-        <!-- Mian content -->
+        <!-- Modal for Deleting User -->
+        <div id="delete-profile-modal" tabindex="-1"
+            class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+            <div class="relative p-4 w-full max-w-md max-h-full">
+                <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                    <button type="button"
+                        class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                        data-modal-hide="delete-profile-modal">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                    <div class="p-4 md:p-5 text-center">
+                        <svg class="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200" aria-hidden="true"
+                            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                        </svg>
+                        <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to
+                            delete your Profile?</h3>
+                        <a th:href="@{/user/deleteProfile}" data-modal-hide="delete-profile-modal"
+                            class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
+                            Yes, I'm sure
+                        </a>
+                        <button data-modal-hide="delete-profile-modal" type="button"
+                            class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">No,
+                            cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main content -->
         <div class="p-4 sm:ml-64">
+            <div id="msg" th:insert="~{message :: messagebox}"></div>
+            <div class="mt-8 max-w-4xl mx-auto space-y-4">
+                <!-- Account Settings Dropdown -->
+                <details class="bg-white rounded-lg shadow-md p-6 dark:bg-gray-800 group">
+                    <summary
+                        class="text-lg font-semibold text-gray-800 dark:text-white flex justify-between cursor-pointer">
+                        Account Settings
+                        <span class="group-open:rotate-180 transition-transform">&#9660;</span>
+                    </summary>
+                    <!-- Name & Email -->
+                    <details class="bg-white rounded-lg shadow-md my-6 p-6 dark:bg-gray-800 group">
+                        <summary
+                            class="text-lg font-bold text-gray-800 dark:text-white flex justify-between cursor-pointer">
+                            Update your Profile Name
+                            <span class="group-open:rotate-180 transition-transform">&#9660;</span>
+                        </summary>
+                        <form th:action="@{/user/changeName}" method="POST" th:object="${nameForm}"
+                            class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <input type="text" th:field="*{name}" name="name" id="name"
+                                    placeholder="Enter your name"
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:border-gray-700 focus:border-blue-500 dark:bg-gray-700 dark:focus:ring-blue-500">
+                                <p th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+                                    class="text-red-600 px-1 py-2"></p>
+                            </div>
+                            <button type="submit"
+                                class="w-40 h-10 mt-1 bg-blue-500 hover:bg-blue-600 text-white font-medium px-4 rounded shadow-md transition">
+                                Save Changes
+                            </button>
+                        </form>
+                    </details>
+                    <!-- Password change -->
+                    <details class="bg-white rounded-lg shadow-md my-6 p-6 dark:bg-gray-800 group">
+                        <summary
+                            class="text-lg font-bold text-gray-800 dark:text-white flex justify-between cursor-pointer">
+                            Change your password
+                            <span class="group-open:rotate-180 transition-transform">&#9660;</span>
+                        </summary>
+                        <form th:action="@{/user/changePassword}" method="POST" th:object="${passwordForm}"
+                            class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label for="currentPassword"
+                                    class="block text-sm font-medium text-gray-700 dark:text-gray-300">Current
+                                    Password</label>
+                                <input type="password" th:field="*{currentPassword}" name="currentPassword"
+                                    id="currentPassword" placeholder="Current Password"
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:border-gray-700 focus:border-blue-500 dark:bg-gray-700 dark:focus:ring-blue-500">
+                            </div>
+                            <div>
+                                <label for="newPassword"
+                                    class="block text-sm font-medium text-gray-700 dark:text-gray-300">New
+                                    Password</label>
+                                <input type="password" th:field="*{newPassword}" name="newPassword" id="newPassword"
+                                    placeholder="New Password"
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm dark:border-gray-700 focus:border-blue-500 dark:bg-gray-700 dark:focus:ring-blue-500">
+                                <p th:if="${#fields.hasErrors('newPassword')}" th:errors="*{newPassword}"
+                                    class="text-red-600 px-1 py-2"></p>
+                            </div>
+                            <button type="submit"
+                                class="mt-6 bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded shadow-md transition">
+                                Change password
+                            </button>
+                        </form>
+                    </details>
+                    <!-- Account deletion -->
+                    <section class="bg-white rounded-lg shadow-md my-6 p-6 dark:bg-gray-800">
+                        <h2 class="text-xl font-semibold text-gray-800 dark:text-white">Account Deletion</h2>
+                        <p class="text-gray-500 dark:text-gray-400 mt-1 mb-4">You can not recover your contacts once you
+                            delete your Account</p>
+                        <div class="flex items-center space-x-4">
+                            <button type="button" data-modal-target="delete-profile-modal"
+                                data-modal-show="delete-profile-modal"
+                                class="w-32 h-10 text-center text-white py-2 rounded-md bg-red-600 hover:bg-red-800 dark:bg-red-600 dark:hover:bg-red-800">
+                                Delete Account
+                            </button>
+                        </div>
+                    </section>
+                </details>
+
+                <!-- Privacy Settings Dropdown -->
+                <details class="bg-white rounded-lg shadow-md p-6 dark:bg-gray-800 group">
+                    <summary
+                        class="text-lg font-semibold text-gray-800 dark:text-white flex justify-between cursor-pointer">
+                        Privacy Settings
+                        <span class="group-open:rotate-180 transition-transform">&#9660;</span>
+                    </summary>
+                    <div class="mt-4">
+                        <p class="text-gray-500 dark:text-gray-400 mb-4">Control your data and permissions</p>
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <input type="checkbox" id="email-notifications"
+                                    class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600">
+                                <label for="email-notifications" class="ml-3 text-sm text-gray-700 dark:text-gray-300">
+                                    Enable email notifications
+                                </label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="data-sharing"
+                                    class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600">
+                                <label for="data-sharing" class="ml-3 text-sm text-gray-700 dark:text-gray-300">
+                                    Allow data sharing with third parties
+                                </label>
+                            </div>
+                        </div>
+                        <button
+                            class="mt-6 bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded shadow-md transition">
+                            Save Preferences
+                        </button>
+                    </div>
+                </details>
+
+                <!-- Theme Settings Dropdown -->
+                <details class="bg-white rounded-lg shadow-md p-6 dark:bg-gray-800 group">
+                    <summary
+                        class="text-lg font-semibold text-gray-800 dark:text-white flex justify-between cursor-pointer">
+                        Theme Settings
+                        <span class="group-open:rotate-180 transition-transform">&#9660;</span>
+                    </summary>
+                    <div class="mt-4">
+                        <p class="text-gray-500 dark:text-gray-400 mb-4">Customize your application theme</p>
+                        <div class="flex items-center space-x-4">
+                            <button
+                                class="w-24 h-10 rounded-md bg-gray-200 hover:bg-gray-300 focus:ring-2 focus:ring-blue-500 transition dark:bg-gray-700 dark:hover:bg-gray-600"
+                                onclick="lightTheme()">
+                                Light
+                            </button>
+                            <button
+                                class="w-24 h-10 rounded-md bg-gray-800 text-white hover:bg-gray-900 focus:ring-2 focus:ring-blue-500 transition dark:bg-gray-600 dark:hover:bg-gray-500"
+                                onclick="darkTheme()">
+                                Dark
+                            </button>
+                            <button
+                                class="w-24 h-10 rounded-md bg-gradient-to-r from-purple-500 to-blue-500 text-white hover:from-purple-600 hover:to-blue-600 focus:ring-2 focus:ring-blue-500 transition"
+                                onclick="systemTheme()">
+                                System
+                            </button>
+                        </div>
+                    </div>
+                </details>
+
+                <!-- Notifications Dropdown -->
+                <details class="bg-white rounded-lg shadow-md p-6 dark:bg-gray-800 group">
+                    <summary
+                        class="text-lg font-semibold text-gray-800 dark:text-white flex justify-between cursor-pointer">
+                        Notifications
+                        <span class="group-open:rotate-180 transition-transform">&#9660;</span>
+                    </summary>
+                    <div class="mt-4">
+                        <p class="text-gray-500 dark:text-gray-400 mb-4">Adjust your notification preferences</p>
+                        <div class="space-y-4">
+                            <div class="flex items-center">
+                                <input type="checkbox" id="push-notifications"
+                                    class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600">
+                                <label for="push-notifications" class="ml-3 text-sm text-gray-700 dark:text-gray-300">
+                                    Enable push notifications
+                                </label>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" id="sms-notifications"
+                                    class="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500 dark:bg-gray-700 dark:border-gray-600">
+                                <label for="sms-notifications" class="ml-3 text-sm text-gray-700 dark:text-gray-300">
+                                    Enable SMS notifications
+                                </label>
+                            </div>
+                        </div>
+                        <button
+                            class="mt-6 bg-blue-500 hover:bg-blue-600 text-white font-medium py-2 px-4 rounded shadow-md transition">
+                            Save Changes
+                        </button>
+                    </div>
+                </details>
+            </div>
 
         </div>
     </main>
 </body>
-<script></script>
+<script th:src="@{/js/themeChange.js}"></script>
 
 </html>

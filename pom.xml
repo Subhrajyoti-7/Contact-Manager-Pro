@@ -9,11 +9,11 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.scm</groupId>
-	<artifactId>smart_contact_manager</artifactId>
+	<artifactId>connexio</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>smart_contact_manager</name>
-	<description>Demo project for Spring Boot</description>
+	<name>connexio</name>
+	<description>Web app for storing and managing contacts</description>
 	<url/>
 	<licenses>
 		<license/>

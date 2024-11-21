@@ -74,15 +74,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Users updateUser(Users user) {
-        Users users = userRepo.findById(user.getUid())
-                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
-        users.setName(user.getName());
-        users.setEmail(user.getEmail());
-        users.setPhoneNumber(user.getPhoneNumber());
-        users.setAbout(user.getAbout());
-        users.setPassword(user.getPassword());
-        users.setProvider(user.getProvider());
-        return userRepo.save(users);
+        return userRepo.save(user);
+    }
+
+    @Override
+    public Users updatePassword(Users user) {
+        // Encoding the password
+        String encodedPassword = securityConfig.passwordEncoder().encode(user.getPassword());
+        user.setPassword(encodedPassword);
+        return userRepo.save(user);
     }
 
     @Override
