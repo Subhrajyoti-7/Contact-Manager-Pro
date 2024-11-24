@@ -11,27 +11,16 @@
 
 <body>
     <main class="mt-20">
-        <button data-drawer-target="sidebar-multi-level-sidebar" data-drawer-toggle="sidebar-multi-level-sidebar"
-            aria-controls="sidebar-multi-level-sidebar" type="button"
-            class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
-            <span class="sr-only">Open sidebar</span>
-            <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
-                xmlns="http://www.w3.org/2000/svg">
-                <path clip-rule="evenodd" fill-rule="evenodd"
-                    d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z">
-                </path>
-            </svg>
-        </button>
-
         <!-- Sidebar -->
         <div th:insert="~{user/sidebar}">Sidebar</div>
 
         <!-- Mian content -->
         <div class="p-4 sm:ml-64" th:object="${user}">
             <!-- Profile Header -->
-            <header class="bg-gradient-to-r from-blue-600 to-green-400 text-white py-7 mx-7 h-76 rounded-full">
+            <header
+                class="max-md:!bg-gradient-to-b bg-gradient-to-r from-blue-600 to-green-400 text-white py-7 mx-7 h-76 rounded-full max-md:!rounded-xl max-md:mx-0">
                 <div class="container mx-auto text-center">
-                    <div class="flex justify-evenly items-center">
+                    <div class="flex justify-evenly items-center max-md:flex-col">
                         <div class="cursor-pointer" title="View Profile Picture" data-modal-target="default-modal"
                             data-modal-toggle="default-modal">
                             <img th:if="*{profilePic == 'user-default.png'}" th:src="@{/images/user-default.png}" alt=""
@@ -39,7 +28,7 @@
                             <img th:unless="*{profilePic == 'user-default.png'}" th:src="*{profilePic}" alt=""
                                 class="w-64 h-64 rounded-full border-4 border-white">
                         </div>
-                        <div class="text-start">
+                        <div class="text-start max-md:text-center">
                             <h1 th:text="*{name}" class="text-3xl font-semibold">John Doe</h1>
                             <p th:text="*{email}" class="text-gray-200 mt-2">john.doe@example.com</p>
                             <p th:text="*{phoneNumber}" class="text-gray-200 mt-2">0123456789</p>
@@ -47,7 +36,7 @@
                     </div>
                 </div>
                 <a th:href="@{/user/editProfile}"
-                    class="absolute top-16 right-4 bg-gray-100 text-blue-600 px-5 py-2 rounded-full shadow-md hover:bg-gray-200 transition duration-300">
+                    class="absolute top-16 max-md:top-24 right-4 bg-gray-100 text-blue-600 px-5 py-2 rounded-full shadow-md hover:bg-gray-200 transition duration-300">
                     Edit Profile
                 </a>
             </header>
@@ -87,9 +76,9 @@
                     <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
                         <div class="p-4">
                             <img th:if="*{profilePic == 'user-default.png'}" th:src="@{/images/user-default.png}" alt=""
-                                class="h-[85vh]">
+                                class="h-[85vh] max-md:h-80">
                             <img th:unless="*{profilePic == 'user-default.png'}" th:src="*{profilePic}" alt=""
-                                class="h-[85vh]">
+                                class="h-[85vh] max-md:h-80">
                         </div>
                     </div>
                 </div>
@@ -97,6 +86,6 @@
         </div>
     </main>
 </body>
-<script th:src="@{/js/profilePicView.js}"></script>
+<script></script>
 
 </html>

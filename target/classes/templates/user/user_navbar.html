@@ -5,15 +5,16 @@
         <!-- Brand Logo-->
         <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
             <img th:src="@{/images/connexio-logo.jpg}" class="h-8 rounded-lg" alt="Connexio Logo">
-            <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Connexio</span>
+            <span
+                class="self-center text-2xl max-md:!text-lg font-semibold whitespace-nowrap dark:text-white">Connexio</span>
         </a>
 
         <!-- Buttons -->
-        <div class="flex gap-3 md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+        <div class="flex gap-3 max-md:!gap-0 md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
             <!-- Profile -->
-            <a th:href="@{/user/profile}" class="flex gap-2 items-center mr-10">
+            <a th:href="@{/user/profile}" class="flex gap-2 items-center mr-10 max-md:mr-0">
                 <img th:src="${user.profilePic}" alt="P" class="w-9 rounded-full">
-                <h3 th:text="${user.name}" class="font-serif font-semibold">profile</h3>
+                <h3 th:text="${user.name}" class="font-serif font-semibold max-md:hidden">profile</h3>
             </a>
             <!-- Dark/Light mode -->
             <button type="button" id="btn" name="mode" title="Toggle Dark Mode" class="w-9 flex" onclick="applyTheme()">
@@ -22,7 +23,7 @@
             </button>
             <!-- Logout -->
             <a th:href="@{/logout}" type="button" id="lg-out"
-                class="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Logout</a>
+                class="max-md:hidden text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800">Logout</a>
             <!-- Main menu button for mobile view -->
             <button data-collapse-toggle="navbar-sticky" type="button"
                 class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
@@ -61,6 +62,10 @@
                 <li>
                     <a th:href="@{/contact-us}"
                         class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Contact</a>
+                </li>
+                <li class="block md:hidden">
+                    <a th:href="@{/logout}"
+                        class="block py-2 px-3 text-red-600 rounded dark:text-white dark:hover:bg-red-700">Logout</a>
                 </li>
             </ul>
         </div>
